@@ -18,7 +18,6 @@ class SlideshowFragment : Fragment() {
     private var _binding: FragmentSlideshowBinding? = null
     private val binding get() = _binding!!
 
-    // 🔹 4 seviyeli Araba → Marka → Model → Yıl verisi
     private val carData = mapOf(
         "Otomobil" to mapOf(
             "BMW" to mapOf(
@@ -55,7 +54,6 @@ class SlideshowFragment : Fragment() {
         val modelSpinner = binding.modelSpinner
         val yearSpinner = binding.yearSpinner
 
-        // 1️⃣ Araba Türlerini Yükle
         val types = carData.keys.toList()
         typeSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
 
@@ -73,7 +71,6 @@ class SlideshowFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        // 2️⃣ Marka seçildiğinde modelleri doldur
         brandSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedType = typeSpinner.selectedItem?.toString() ?: return
@@ -87,7 +84,6 @@ class SlideshowFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        // 3️⃣ Model seçildiğinde yılları doldur
         modelSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedType = typeSpinner.selectedItem?.toString() ?: return
