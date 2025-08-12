@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -13,16 +16,9 @@ import com.example.vehiclemaintenanceapp.databinding.FragmentSlideshowBinding
 class SlideshowFragment : Fragment() {
 
     private var _binding: FragmentSlideshowBinding? = null
-
-    private lateinit var typeSpinner: Spinner
-    private lateinit var brandSpinner: Spinner
-    private lateinit var modelSpinner: Spinner
-    private lateinit var yearSpinner: Spinner
-
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    // 🔹 4 seviyeli Araba → Marka → Model → Yıl verisi
     private val carData = mapOf(
         "Otomobil" to mapOf(
             "BMW" to mapOf(
@@ -40,20 +36,68 @@ class SlideshowFragment : Fragment() {
         )
     )
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val slideshowViewModel =
-            ViewModelProvider(this).get(SlideshowViewModel::class.java)
-
         _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        setupSpinners()
 
         return root
+    }
+
+    private fun setupSpinners() {
+        val typeSpinner = binding.typeSpinner
+        val brandSpinner = binding.brandSpinner
+        val modelSpinner = binding.modelSpinner
+        val yearSpinner = binding.yearSpinner
+
+        // 1️⃣ Araba Türlerini Yükle
+        val types = carData.keys.toList()
+        typeSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
+
+        // Tür seçildiğinde markaları doldur
+        typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedType = types[position]
+                val brands = carData[selectedType]?.keys?.toList() ?: emptyList()
+                brandSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, brands)
+
+                // Marka değiştiğinde modeli ve yılı sıfırla
+                modelSpinner.adapter = null
+                yearSpinner.adapter = null
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        // 2️⃣ Marka seçildiğinde modelleri doldur
+        brandSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedType = typeSpinner.selectedItem?.toString() ?: return
+                val selectedBrand = brandSpinner.selectedItem?.toString() ?: return
+                val models = carData[selectedType]?.get(selectedBrand)?.keys?.toList() ?: emptyList()
+                modelSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, models)
+
+                // Yılı sıfırla
+                yearSpinner.adapter = null
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        // 3️⃣ Model seçildiğinde yılları doldur
+        modelSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedType = typeSpinner.selectedItem?.toString() ?: return
+                val selectedBrand = brandSpinner.selectedItem?.toString() ?: return
+                val selectedModel = modelSpinner.selectedItem?.toString() ?: return
+                val years = carData[selectedType]?.get(selectedBrand)?.get(selectedModel) ?: emptyList()
+                yearSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, years)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
     }
 
     override fun onDestroyView() {
