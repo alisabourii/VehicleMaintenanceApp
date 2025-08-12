@@ -32,7 +32,19 @@ class SlideshowFragment : Fragment() {
             "Jeep" to mapOf(
                 "Cherokee" to listOf("2015", "2016", "2017")
             )
+        ),
+        "Ticari" to mapOf(
+            "VW" to mapOf(
+                "Caddy" to listOf("2005", "2006", "2077")
+            )
+        ),
+        "Motor" to mapOf(
+            "Bajaj" to mapOf(
+                "Dominar" to listOf("2019", "2020", "2021")
+            )
         )
+
+
     )
 
     override fun onCreateView(
@@ -53,6 +65,7 @@ class SlideshowFragment : Fragment() {
         val brandSpinner = binding.brandSpinner
         val modelSpinner = binding.modelSpinner
         val yearSpinner = binding.yearSpinner
+        val engineSpinner = binding.engineSpinner
 
         val types = carData.keys.toList()
         typeSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
@@ -94,6 +107,18 @@ class SlideshowFragment : Fragment() {
             }
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+
+        engineSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedType = typeSpinner.selectedItem?.toString() ?: return
+                val selectedBrand = brandSpinner.selectedItem?.toString() ?: return
+                val selectedModel = modelSpinner.selectedItem?.toString() ?: return
+                val years = carData[selectedType]?.get(selectedBrand)?.get(selectedModel) ?: emptyList()
+                engineSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, years)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
     }
 
     override fun onDestroyView() {
