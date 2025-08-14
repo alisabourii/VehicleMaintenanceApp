@@ -108,17 +108,6 @@ class SlideshowFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        engineSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedType = typeSpinner.selectedItem?.toString() ?: return
-                val selectedBrand = brandSpinner.selectedItem?.toString() ?: return
-                val selectedModel = modelSpinner.selectedItem?.toString() ?: return
-                val years = carData[selectedType]?.get(selectedBrand)?.get(selectedModel) ?: emptyList()
-                engineSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, years)
-            }
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-
     }
 
     override fun onDestroyView() {
