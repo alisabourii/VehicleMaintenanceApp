@@ -11,6 +11,8 @@
         android:layout_width="253dp"
         android:layout_height="143dp"
         android:layout_marginTop="40dp"
+        android:scaleType="centerCrop"
+        android:background="@null"
         android:src="@drawable/ic_menu_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
