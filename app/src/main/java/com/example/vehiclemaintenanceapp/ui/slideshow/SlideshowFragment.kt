@@ -76,10 +76,6 @@ class SlideshowFragment : Fragment() {
         return binding.root
     }
 
-    private fun imageRunner(){
-
-    }
-
     private fun setupSpinners() {
         val typeSpinner = binding.typeSpinner
         val brandSpinner = binding.brandSpinner
