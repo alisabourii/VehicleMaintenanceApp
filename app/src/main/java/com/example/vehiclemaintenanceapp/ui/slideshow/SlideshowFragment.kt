@@ -7,16 +7,20 @@ import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.vehiclemaintenanceapp.R
 import com.example.vehiclemaintenanceapp.databinding.FragmentSlideshowBinding
 
 class SlideshowFragment : Fragment() {
 
     private var _binding: FragmentSlideshowBinding? = null
     private val binding get() = _binding!!
+    private lateinit var imageButton: ImageButton
 
     private val carData = mapOf(
         "Otomobil" to mapOf(
@@ -47,17 +51,33 @@ class SlideshowFragment : Fragment() {
 
     )
 
+    // Galeriden resim seçmek için launcher
+    private val pickImageLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri?.let {
+                imageButton.setImageURI(it)
+            }
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+
+        imageButton = binding.imageButton
+        imageButton.setOnClickListener {
+            pickImageLauncher.launch("image/*")
+        }
 
         setupSpinners()
 
-        return root
+        return binding.root
+    }
+
+    private fun imageRunner(){
+
     }
 
     private fun setupSpinners() {
@@ -109,6 +129,7 @@ class SlideshowFragment : Fragment() {
         }
 
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
