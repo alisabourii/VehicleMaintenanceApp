@@ -22,29 +22,32 @@ class SlideshowFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var imageButton: ImageButton
 
+    private val years = listOf("2017", "2018", "2019", "2020","2021", "2022", "2023", "2024","2025")
+
     private val carData = mapOf(
         "Otomobil" to mapOf(
             "BMW" to mapOf(
-                "3 Series" to listOf("2020", "2021", "2022"),
-                "X5" to listOf("2018", "2019", "2020")
+                "3 Series" to years,
+                "X5" to years
             ),
             "Toyota" to mapOf(
-                "Corolla" to listOf("2017", "2018", "2019", "2020")
+                "Corolla" to years,
+                "4Runner" to years
             )
         ),
         "SUV" to mapOf(
             "Jeep" to mapOf(
-                "Cherokee" to listOf("2015", "2016", "2017")
+                "Cherokee" to years
             )
         ),
         "Ticari" to mapOf(
             "VW" to mapOf(
-                "Caddy" to listOf("2005", "2006", "2077")
+                "Caddy" to years
             )
         ),
         "Motor" to mapOf(
             "Bajaj" to mapOf(
-                "Dominar" to listOf("2019", "2020", "2021")
+                "Dominar" to years
             )
         )
 
