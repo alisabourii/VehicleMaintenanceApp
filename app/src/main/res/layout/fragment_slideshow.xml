@@ -8,87 +8,101 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="253dp"
-        android:layout_height="143dp"
-        android:layout_marginTop="40dp"
-        android:scaleType="centerCrop"
+        android:layout_width="314dp"
+        android:layout_height="152dp"
+        android:layout_marginTop="16dp"
         android:background="@null"
+        android:scaleType="centerCrop"
         android:src="@drawable/royalcar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="318dp"
+        android:layout_height="233dp"
+        android:layout_marginStart="40dp"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.334">
+        app:layout_constraintVertical_bias="0.363">
 
         <Spinner
             android:id="@+id/typeSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="36dp" />
 
         <Spinner
             android:id="@+id/brandSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="36dp" />
 
         <Spinner
             android:id="@+id/modelSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="36dp" />
 
         <Spinner
             android:id="@+id/yearSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="36dp" />
 
         <Spinner
             android:id="@+id/engineSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/engine_options"
+            android:layout_height="36dp"
             android:autofillHints="Motor hacmı"
-            />
-
+            android:entries="@array/engine_options" />
 
 
     </LinearLayout>
 
     <EditText
         android:id="@+id/editTextDate"
-        android:layout_width="185dp"
+        android:layout_width="289dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Son Muayene Tarihi"
         android:inputType="date"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.669" />
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="289dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:hint="Son Yağ değişim Tarihi(Tahmini)"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.864" />
 
     <EditText
         android:id="@+id/editTextDate2"
-        android:layout_width="185dp"
+        android:layout_width="289dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Son Sigorta Tarihi"
         android:inputType="date"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toEndOf="@+id/editTextDate"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.76" />
 
     <Button
         android:id="@+id/button"
@@ -100,21 +114,7 @@
         app:layout_constraintHorizontal_bias="0.106"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
-    <EditText
-        android:id="@+id/editTextNumber"
-        android:layout_width="289dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Son Yağ değişim Tarihi(Tahmini)"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.976"
+        app:rippleColor="#E70909" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
