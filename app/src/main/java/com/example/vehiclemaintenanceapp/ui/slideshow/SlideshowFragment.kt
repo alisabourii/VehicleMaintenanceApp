@@ -26,14 +26,36 @@ class SlideshowFragment : Fragment() {
 
     private val carData = mapOf(
         "Otomobil" to mapOf(
-            "BMW" to mapOf(
-                "3 Series" to years,
-                "X5" to years
-            ),
             "Toyota" to mapOf(
+                "4Runner" to years,
                 "Corolla" to years,
-                "4Runner" to years
+                "Corolla Cross" to years,
+                "Corolla Hatchback" to years,
+                "C-HR" to years,
+                "RAV4" to years,
+                "Yaris" to years,
+                "Yaris Cross" to years,
+                "Land Cruiser Prado" to years,
+                "HILUX" to years,
+                "Proace City" to years,
+                "Proace City Cargo" to years,
+                "Proace Verso" to years,
+                "Proace Cargo" to years,
+            ),
+            "BMW" to mapOf(
+                "I Series" to years,
+                "X Series" to years,
+                "M Series" to years,
+                "1 Series" to years,
+                "2 Series" to years,
+                "3 Series" to years,
+                "4 Series" to years,
+                "5 Series" to years,
+                "7 Series" to years,
+                "8 Series" to years,
+                "Z4 Series" to years
             )
+
         ),
         "SUV" to mapOf(
             "Jeep" to mapOf(
