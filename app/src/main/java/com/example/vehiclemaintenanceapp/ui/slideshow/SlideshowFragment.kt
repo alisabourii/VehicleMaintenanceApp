@@ -1,12 +1,15 @@
 package com.example.vehiclemaintenanceapp.ui.slideshow
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
@@ -15,12 +18,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.vehiclemaintenanceapp.R
 import com.example.vehiclemaintenanceapp.databinding.FragmentSlideshowBinding
+import java.io.File
 
 class SlideshowFragment : Fragment() {
 
     private var _binding: FragmentSlideshowBinding? = null
     private val binding get() = _binding!!
     private lateinit var imageButton: ImageButton
+    private lateinit var saveButton: Button
 
     private val years = listOf("2017", "2018", "2019", "2020","2021", "2022", "2023", "2024","2025")
 
@@ -107,6 +112,7 @@ class SlideshowFragment : Fragment() {
         val modelSpinner = binding.modelSpinner
         val yearSpinner = binding.yearSpinner
         val engineSpinner = binding.engineSpinner
+        val saveButton = binding.button
 
         val types = carData.keys.toList()
         typeSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
@@ -148,6 +154,10 @@ class SlideshowFragment : Fragment() {
             }
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+
+
+        saveButton.setOnClickListener {
+Log.d("Msg","Clicked")        }
 
     }
 
