@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -106,6 +107,39 @@ class SlideshowFragment : Fragment() {
         return binding.root
     }
 
+    private fun saveCurrentSelection() {
+        val type  = binding.typeSpinner.selectedItem?.toString() ?: return
+        val brand = binding.brandSpinner.selectedItem?.toString() ?: return
+        val model = binding.modelSpinner.selectedItem?.toString() ?: return
+        val year  = binding.yearSpinner.selectedItem?.toString() ?: return
+        val engine = binding.engineSpinner.selectedItem?.toString() ?: ""
+
+        // 🔴 DİKKAT: Fragment'ta Context ALWAYS -> requireContext()
+        CsvStore.appendRow(
+            requireContext(),
+            listOf(type, brand, model, year, engine)
+        )
+
+        Toast.makeText(requireContext(), "Kaydedildi ✅", Toast.LENGTH_SHORT).show()
+        Log.d("CSV", "Path: " + CsvStore.filePath(requireContext()))
+    }
+
+    private fun loadAllRows() {
+        val rows = CsvStore.readRows(requireContext())
+        // Örnek: Logcat’te göster
+        rows.forEach { row ->
+            Log.d("CSV", row.joinToString(" | "))
+        }
+        Toast.makeText(requireContext(), "Toplam satır: ${rows.size}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
+
     private fun setupSpinners() {
         val typeSpinner = binding.typeSpinner
         val brandSpinner = binding.brandSpinner
@@ -156,14 +190,12 @@ class SlideshowFragment : Fragment() {
         }
 
 
-        saveButton.setOnClickListener {
-Log.d("Msg","Clicked")        }
-
-    }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        saveButton.setOnClickListener{
+            saveCurrentSelection()   // Aşağıdaki fonksiyon
+
+        }
+
     }
 }
