@@ -27,6 +27,8 @@ class SlideshowFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var imageButton: ImageButton
     private lateinit var saveButton: Button
+    private lateinit var TestButton: Button
+
 
     private val years = listOf("2017", "2018", "2019", "2020","2021", "2022", "2023", "2024","2025")
 
@@ -113,11 +115,14 @@ class SlideshowFragment : Fragment() {
         val model = binding.modelSpinner.selectedItem?.toString() ?: return
         val year  = binding.yearSpinner.selectedItem?.toString() ?: return
         val engine = binding.engineSpinner.selectedItem?.toString() ?: ""
+        val lastControl = binding.editTextDate.text?.toString()?:return
+        val insuranceDate = binding.editTextDate2.text?.toString()?:return
+        val oilControl = binding.editTextNumber.text?.toString()?:return
 
         // 🔴 DİKKAT: Fragment'ta Context ALWAYS -> requireContext()
         CsvStore.appendRow(
             requireContext(),
-            listOf(type, brand, model, year, engine)
+            listOf(type, brand, model, year, engine, lastControl,insuranceDate, oilControl)
         )
 
         Toast.makeText(requireContext(), "Kaydedildi ✅", Toast.LENGTH_SHORT).show()
@@ -147,6 +152,8 @@ class SlideshowFragment : Fragment() {
         val yearSpinner = binding.yearSpinner
         val engineSpinner = binding.engineSpinner
         val saveButton = binding.button
+        val testButton = binding.button2
+
 
         val types = carData.keys.toList()
         typeSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
@@ -195,6 +202,9 @@ class SlideshowFragment : Fragment() {
         saveButton.setOnClickListener{
             saveCurrentSelection()   // Aşağıdaki fonksiyon
 
+        }
+        testButton.setOnClickListener {
+            loadAllRows()
         }
 
     }
