@@ -10,13 +10,15 @@
         android:id="@+id/imageButton"
         android:layout_width="314dp"
         android:layout_height="152dp"
-        android:layout_marginTop="16dp"
         android:background="@null"
         android:scaleType="centerCrop"
         android:src="@drawable/royalcar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.628"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.058" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
